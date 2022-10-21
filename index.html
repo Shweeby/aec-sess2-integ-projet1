@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Petit quiz ludique sur la géographie">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.0/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <title>TP3 intégration</title>
+</head>
+
+<body>
+    <main>
+        <header>
+            <h1><a href="./index.html" title="Retourner au départ du quiz">Géo' quiz</a></h1>
+        </header>
+        <!-- Etape 1 / infos persos -->
+        <article id="etape1" class="etape1" aria-live="polite">
+            <h2>Informations personnelles</h2>
+            <div class="cadre-formulaire">
+                <div id="showErrors"></div>
+                <form id="formulaire">
+                    <p>Tous les champs sont obligatoires.</p>
+                    <div class="form-group">
+                        <label for="prenom">Prénom</label>
+                        <input type="text" class="form-control" name="prenom" id="prenom" aria-required="true" autocomplete="given-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="nom">Nom</label>
+                        <input type="text" class="form-control" name="nom" id="nom" aria-required="true" autocomplete="name">
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Date de naissance</label>
+                        <input type="date" name="date" id="date" class="form-control" aria-required="true" autocomplete="bday">
+                    </div>
+                    <div class="form-group">
+                        <label for="statut">Statut</label>
+                        <select name="select" id="statut" class="form-control" aria-required="true">
+                            <option value="">-- Choisir --</option>
+                            <option value="Etudiant">Etudiant</option>
+                            <option value="Professeur">Professeur</option>
+                        </select>
+                    </div>
+                    <button type="submit">Accéder aux questions du quiz</button>
+                </form>
+            </div>
+        </article>
+
+        <!-- Etape 2 / questions -->
+        <article id="quiz" class="etape2" aria-live="polite">
+            <h2 id="question"></h2>
+            <p>Une seule réponse possible</p>
+            <div class="cadre-formulaire">
+
+                <div class="progress" aria-valuenow="0" role="progressbar" aria-label="progression dans le quiz">
+                    <div class="progress-bar"></div>
+                </div>
+                <div class="bar"></div>
+                <fieldset class="question">
+                    <legend>Choisir une des réponses proposées</legend>
+                    <div class="form-group">
+                        <input type="radio" name="radio" value="0" id="choix1">
+                        <label for="choix1" id="reponse0"></label>
+
+                    </div>
+                    <div class="form-group">
+                        <input type="radio" name="radio" value="1" id="choix2">
+                        <label for="choix2" id="reponse1"></label>
+
+                    </div>
+                    <div class="form-group">
+                        <input type="radio" name="radio" value="2" id="choix3">
+                        <label for="choix3" id="reponse2"></label>
+
+                    </div>
+                    <div class="form-group">
+                        <input type="radio" name="radio" value="3" id="choix4">
+                        <label for="choix4" id="reponse3"></label>
+                    </div>
+                </fieldset>
+
+                <button id="suivante">Question suivante</button>
+            </div>
+        </article>
+
+        <!-- Etape 3 / modale echec ou reussite -->
+        <div class="modal" tabindex="-1" role="dialog" aria-label="resultat du quiz" aria-live="polite">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div id="result"></div>
+                    <button id="details">Fermer</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Etape 4 / affichage resultats -->
+        <article id="resultat" class="etape4" aria-live="polite">
+            <h2>Le quiz est terminé !</h2>
+            <div id="alert" role="alert"></div>
+            <div class="colonne">
+                <h3>Infos</h3>
+                <table>
+                    <caption>Vos informations personnelles</caption>
+                    <tr>
+                        <th scope="row">Prénom</th>
+                        <td id="MonPrenom"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Nom</th>
+                        <td id="MonNom"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Age</th>
+                        <td id="MonAge"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Statut</th>
+                        <td id="MonStatut"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Score</th>
+                        <td id="scoree"></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="colonne">
+                <h3>Résultats</h3>
+                <table id="tableau-resultats">
+                    <caption>Vos résultats</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Question</th>
+                            <th scope="col">Résultat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <div class="colonne" id="reponses">
+                <h3>Réponses</h3>
+                <div id="accordion"></div>
+            </div>
+        </article>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.0/js/jquery.dataTables.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
