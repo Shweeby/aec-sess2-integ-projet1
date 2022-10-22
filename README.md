@@ -2,7 +2,12 @@
 
 Projet réalisé dans le cadre de mon AEC en développement web. 
 
-L’objectif du travail était de créer un petit quiz en utilisant du JQuery et Bootstrap 4 en respectant certains critères comme d'utiliser des transitions entre les questions, etc. Une fois le petit quiz terminé, les résultats devaient s'afficher sous forme de tableau. 
+L’objectif du travail était de créer un petit quiz en utilisant du JQuery et Bootstrap 4 en respectant certains critères :
+
+![alt text](./images-readme/enonce1.png)
+
+![alt text](./images-readme/enonce2.png)
+
 
 ## Table des matières
 
